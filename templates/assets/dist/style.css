@@ -3197,14 +3197,17 @@ pre {
     -moz-osx-font-smoothing: initial
 }
 
+/*20250520 by Tim 修改样式*/
 code {
+    position: relative;
     font-size: .9em;
-    color: #333;
+    /* color: #333; */
+    color: currentColor;
     padding: .3em;
     border-radius: 5px;
-    background: #f3f4f4
+    /* background: #f3f4f4 */
 }
-
+ 
 pre {
     padding: .75rem 1rem;
     line-height: 1.6;
@@ -3225,6 +3228,18 @@ pre code {
 
 .md-content p code {
     word-break: break-all
+}
+
+/*20250520 by Tim 修改样式*/
+.md-content p code::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    background: currentColor;
+    opacity: .2;
+    border-radius: 5px;
 }
 
 li .mathjax-block,
@@ -3252,22 +3267,25 @@ textarea:focus {
     outline: none
 }
 
+/*20250520 by Tim 修改样式*/
 blockquote {
     position: relative;
     margin: 1em 0;
     padding: 2px 0 2px 24px;
-    background-color: #607d8b0d
+    background-color: #607d8b0d;
+    border-radius: 5px 5px 5px 5px;
 }
 
 blockquote:before {
     position: absolute;
     left: 0;
     top: 0;
-    width: 4px;
+    width: 5px;
     bottom: 0;
     background-color: currentColor;
     content: "";
-    opacity: .2
+    opacity: .2;
+    border-radius: 5px 0 0 5px;
 }
 
 summary {
