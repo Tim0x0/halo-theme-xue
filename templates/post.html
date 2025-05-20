@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="https://www.thymeleaf.org"
-  th:replace="module/macro :: html(title = ${post.spec.title} + ' - ' + ${site.title}, content = ~{::content})"
+  th:replace="~{module/macro :: html(title = ${post.spec.title} + ' - ' + ${site.title}, content = ~{::content})}"
 >
   <th:block th:fragment="content">
     <main class="mx-auto" id="container">
@@ -27,7 +27,7 @@
             th:src="@{/assets/images/loading.gif}"
             class="img-random dark:filter-60 no-zoom absolute left-0 top-0 h-full w-full object-cover"
             th:alt="${post.spec.title}"
-          />  
+          />
         </div>
         <div
           th:if="${#strings.isEmpty(post.spec.cover)} and ${not theme.config.general.enabled_card_random_cover_list}"
@@ -86,6 +86,15 @@
                 </span>
               </a>
             </div>
+
+            <!-- 许可 -->
+            <div style="display:flex;align-items:center;line-height: 1.2rem;">
+                    许可协议:&nbsp;
+                    <a style="font-weight:600;" href="https://creativecommons.org/licenses/by/4.0/">
+                      CC BY 4.0
+                    </a>
+            </div>
+
             <div th:if="${theme.config.post.allow_share}" class="share-items">
               <a
                 class="share-link share-item"
@@ -96,7 +105,7 @@
               >
                 <span class="iconfont icon-round_link_fill text-3xl"></span>
               </a>
-              <a
+              <!-- <a
                 class="share-item"
                 th:href="@{http://service.weibo.com/share/share.php?sharesource=weibo&title=分享：{title}，原文链接：{url}&pic={pic}(title=${post.spec.title},url=${post.status.permalink},pic=${post.spec.cover})}"
                 target="_blank"
@@ -107,8 +116,8 @@
                   class="iconfont icon-xinlang text-3xl"
                   style="color: rgb(245, 100, 103)"
                 ></span>
-              </a>
-              <a
+              </a> -->
+              <!-- <a
                 class="share-item"
                 th:href="@{https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&sharesource=qzone&title={title}&pics=${pics}(url=${post.status.permalink},title=${post.spec.title},pics=${post.spec.cover})}"
                 target="_blank"
@@ -119,10 +128,10 @@
                   class="iconfont icon-Qzone text-3xl"
                   style="color: rgb(245, 190, 63)"
                 ></span>
-              </a>
+              </a> -->
               <a
                 class="share-item"
-                th:href="@{https://connect.qq.com/widget/shareqq/index.html?url={url}&title={title}&pics={pics}(url=${post.status.permalink},title=${post.spec.title},pics=${post.spec.cover})}"
+                th:href="@{https://connect.qq.com/widget/shareqq/index.html?url=https://blog.timoxo.cn{url}&title={title}&pics={pics}(url=${post.status.permalink},title=${post.spec.title},pics=${post.spec.cover})}"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="分享到QQ"
@@ -146,14 +155,12 @@
       <div
         class="md-content mx-auto mt-8 max-w-4xl text-center tracking-wider sm:leading-normal md:leading-relaxed"
       >
-        <th:block th:replace="module/widget/sponsor :: sponsor" />
+        <th:block th:replace="~{module/widget/sponsor :: sponsor}" />
         <div class="my-4 inline-block text-center">
-          <!-- TODO add display likes support -->
           <span
             role="button"
             class="iconfont icon-heart like-btn relative z-10 inline-block h-full w-28 cursor-pointer rounded-full bg-red-600 py-3 text-white hover:bg-red-500"
-            data-path="/api/content/posts/likes"
-            th:attr="data-count=0"
+            th:attr="data-count=${post.stats.upvote},data-group=content.halo.run,data-plural=posts,data-name=${post.metadata.name}"
           >
           </span>
         </div>
@@ -161,11 +168,12 @@
       </div>
 
       <!-- 上一篇和下一篇 -->
-      <!-- <#if settings.post_nepre!true>
-      <div class="mx-4 md:mx-auto mt-8 max-w-4xl tracking-wider md:leading-relaxed sm:leading-normal">
-        <#include "module/widget/prev_next_page.ftl">
+      <div
+        th:if="${theme.config.post.post_nepre}"
+        class="mx-4 mt-8 max-w-4xl tracking-wider sm:leading-normal md:mx-auto md:leading-relaxed"
+      >
+        <th:block th:replace="~{module/widget/prev_next_page}" />
       </div>
-    </#if> -->
 
       <div
         class="md-content mx-4 mt-8 max-w-4xl tracking-wider sm:leading-normal md:mx-auto md:leading-relaxed"

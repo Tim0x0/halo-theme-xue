@@ -91,16 +91,38 @@
         </div>
         <div class="float-right inline-block">
           <span class="iconfont icon-see2 text-gray-500">
-            <label>0</label>
+            <label th:text="${post.stats.visit}"></label>
           </span>
           <span class="iconfont icon-uqur text-gray-500">
-            <label>0</label>
+            <label th:text="${post.stats.comment}"></label>
+            <!-- <label name="commentcount"/> -->
           </span>
           <span class="iconfont icon-like text-gray-500">
-            <label>0</label>
+            <label th:text="${post.stats.upvote}"></label>
           </span>
         </div>
       </div>
     </div>
   </div>
+  <!-- 读取artalk评论数量 -->
+  <!--
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+      var list = /*[[${postItems}]]*/;
+      //console.log(list);
+  for(let i=0;i<list.length;i++){
+    var url="/apis/halo.wenjing.xin/v1alpha1/artalk/pageKeyComments?pageKey="+list[i].status.permalink;
+    //console.log(url);
+    fetch(url)
+       .then(res => res.json())
+       .then(d => {
+           //console.log(d);  
+            var label= document.getElementsByName("commentcount")[i];            
+            label.innerText=d.count;
+          })
+        .catch((err) => { console.log(err); })
+  } 
+  /*]]>*/
+</script>
+<-->
 </div>

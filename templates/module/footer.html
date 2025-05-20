@@ -71,7 +71,7 @@
             href="http://beian.miit.gov.cn"
             target="_blank"
             class="text-base text-gray-800 dark:text-gray-500"
-            th:text="${theme.config.genernal?.Icp}"
+            th:text="${theme.config.general?.Icp}"
           ></a>
         </p>
         <p
@@ -118,7 +118,7 @@
           </div>
 
           <div
-            th:if="${theme.config.other?.TimeStatistics}"
+            th:unless="${#strings.isEmpty(theme.config.other?.TimeStatistics)}"
             class="github-badge"
           >
             <a style="color: #fff" rel="license" href="javascript:void(0)">
@@ -140,7 +140,7 @@
               </span>
             </a>
           </div>
-          <div 
+          <div
             th:if="${theme.config.other?.visit_statistics}"
             class="github-badge"
           >
@@ -159,5 +159,5 @@
     </div>
   </footer>
 
-  <th:block th:replace="module/back2Top :: back2Top" />
+  <th:block th:replace="~{module/back2Top :: back2Top}" />
 </th:block>
