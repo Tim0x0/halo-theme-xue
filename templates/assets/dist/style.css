@@ -3237,6 +3237,7 @@ pre code {
     left: 0;
     content: "";
     width: 100%;
+    height: 100%;
     background: currentColor;
     opacity: .2;
     border-radius: 5px;
@@ -3569,12 +3570,13 @@ div.code-toolbar>.toolbar>.toolbar-item:first-child span:before {
     border: none;
     box-shadow: none
 }
-
+ 
 .md-content .code-toolbar .code-block-close .code-expander {
     transform: rotate(90deg)
 }
 
-.md-content .code-toolbar .code-block-close code[class*=language-] {
+/* 20250525 by Tim 修复代码块默认折叠功能失效问题*/
+.md-content .code-toolbar .code-block-close code[class*=hljs] {
     display: none !important
 }
 
@@ -3600,7 +3602,7 @@ a.post-tag:hover {
 .md-content pre {
     position: relative;
     line-height: 1.45;
-    background: #21252b;
+    /* background: #21252b;*/  /* 20250525 by Tim 修复代码块默认背景覆盖代码高亮插件问题*/
     border: 0;
     border-radius: 3px;
     color: var(--base-code-text-color);
@@ -3706,7 +3708,7 @@ td .hljs-button {
 
 table.hljs-ln td {
     padding: 2px 0 2px 4px;
-    background: #21252b
+    /* background: #21252b */ /* 20250525 by Tim 修复代码块默认背景覆盖代码高亮插件问题*/ 
 }
 
 .hljs-ln-code {
