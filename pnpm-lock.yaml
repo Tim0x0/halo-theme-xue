@@ -8,7 +8,7 @@ dependencies:
   alpinejs:
     specifier: ^3.13.3
     version: 3.13.3
-
+ 
 devDependencies:
   '@tailwindcss/aspect-ratio':
     specifier: ^0.4.2
